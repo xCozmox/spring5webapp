@@ -6,9 +6,11 @@ import guru.springframework.spring5webapp.domain.Publisher;
 import guru.springframework.spring5webapp.repositories.AuthorRepository;
 import guru.springframework.spring5webapp.repositories.BookRepository;
 import guru.springframework.spring5webapp.repositories.PublisherRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class BootStrapData implements CommandLineRunner {
 
@@ -25,6 +27,8 @@ public class BootStrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        log.info("Started in Bootstrap");
+
         Author eric = new Author("Eric", "Evans");
         Book ddd = new Book("Domain driven bla bla", "123123");
         Publisher bobPublisher = new Publisher("Bob Publisher House", "YorkStreet 20", "Chicago", "Rheinland-Pfalz", "54343");
@@ -46,10 +50,8 @@ public class BootStrapData implements CommandLineRunner {
         bookRepository.save(noEJB);
 
         publisherRepository.save(bobPublisher);
-        System.out.println("Number of Publishers: " + publisherRepository.count());
-
-        System.out.println("Started in Bootstrap");
-        System.out.println("Number of Books: " + bookRepository.count());
-        System.out.println("Number of Books of Publisher: " + bobPublisher.getBooks().size());
+        log.info("Number of Publishers: " + publisherRepository.count());
+        log.info("Number of Books: " + bookRepository.count());
+        log.info("Number of Books of Publisher: " + bobPublisher.getBooks().size());
     }
 }
